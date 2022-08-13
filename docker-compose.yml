@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  ls:
+    image: localstack/localstack:latest
+    environment:
+      - DEFAULT_REGION=us-east-1
+      - EDGE_PORT=4583
+      - SERVICES=s3,lambda,sqs,dynamodb,serverless
+      - LAMBDA_EXECUTOR=docker-reuse
+      - LAMBDA_STAY_OPEN_MODE=0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "4583:4583"
+  ls_config:
+    depends_on:
+      - ls
+    build: ./localstack_configuration
+  af:
+    build: ./airflow/docker-airflow
+    depends_on:
+      - ls_config
+    volumes:
+      - ./dags:/usr/local/airflow/dags
+      - ./requirements.txt:/requirements.txt
+      - ./data/raw_data:/usr/local/airflow/data/raw_data
+    ports:
+      - "8080:8080"

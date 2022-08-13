@@ -1,0 +1,10 @@
+MarkupSafe==2.0.1
+WTForms==2.3.3
+SQLAlchemy==1.3.13
+SQLAlchemy-JSONField==0.9.0
+SQLAlchemy-Utils==0.36.1
+boto3
+pyspark
+spark-nlp
+matplotlib
+pandas==1.0.5

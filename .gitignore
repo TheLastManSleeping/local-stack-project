@@ -154,7 +154,7 @@ cython_debug/
 
 #Somebody once told me...
 DynamoDB/
-lambda/
+lambda_testing/
 lambda_layers_3/
 lambda_layers_4/
 lambda_layers_5/
